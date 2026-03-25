@@ -9,7 +9,7 @@
         $login = $_POST['login'] ?? null;
         $password = $_POST['password'] ?? null;
 
-        if (!empty($login) && !empty($password)) {
+        if (empty($login) && empty($password)) {
             $user = isValidUser($login, $password, $linkpdo);
 
             if ($user) {
