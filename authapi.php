@@ -8,8 +8,10 @@
     $error = null;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $login = $_POST['login'] ?? null;
-        $password = $_POST['password'] ?? null;
+        $input = json_decode(file_get_contents("php://input"), true);
+
+        $login = $input['login'] ?? null;
+        $password = $input['password'] ?? null;
 
         if (!empty($login) && !empty($password)) {
             $user = isValidUser($login, $password, $linkpdo);
@@ -28,7 +30,7 @@
                 $error = 'Login et/ou mot de passe incorrectes';
             }
         } else {
-            $error = 'Les champs login et password sont obligatoires!!';
+            $error = 'Les champs login et mot de passe sont obligatoires';
         }
     }
 
